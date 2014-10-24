@@ -1,0 +1,133 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
+ * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
+ * All rights reserved.                                                    *
+ *                                                                         *
+ * License: BSD                                                            *
+ *                                                                         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+// definition of tokens, if applicable with token type 
+terminal CON, LET, SIGMA;
+terminal LEFTB, RIGHTB, COMMA, SEMICOLON;
+terminal LPAR, RPAR;
+terminal MINUS, PLUS, TIMES, DIV, UMINUS;
+terminal EQ, LE, LEQ, GE, GEQ, AND, OR;
+terminal String VALUE, ID, STRINGLITERAL;
+terminal TRUE, FALSE;
+terminal IF, THEN, ELSE, ENDIF;
+
+non terminal Tprogram  program;
+non terminal Texplist  explist;
+non terminal Topelist opelist;
+non terminal Tope      ope;
+non terminal Texp      exp;
+non terminal Tboolexp  boolexp;
+non terminal Tident    ident;
+non terminal Tvalue   value;
+non terminal Tlet   let;
+non terminal Tstring   string;
+non terminal Tifthenelse   if;
+//non terminal Tsigma   sigma;
+
+
+// precedences, left associativity
+precedence left EQ, LE, LEQ, GE, GEQ, OR;
+precedence left MINUS, PLUS, OR;
+precedence left TIMES, DIV, AND;
+//precedence right COMMA, SEMICOLON;
+
+// here the rules start 
+
+program       ::= opelist:ol
+                  {: RESULT = new Tprogram(ol); :}
+                ;
+
+explist       ::= exp:e
+                  {: RESULT = new Texplist(e); :}
+                | explist:l COMMA exp:e
+                  {: RESULT = new Texplist(l,e); :}
+                ;
+
+opelist      ::= ope:o
+                  {: RESULT = new Topelist(o);:}
+                | opelist:l ope:o
+                  {: RESULT = new Topelist(l,o); :}
+                ;
+
+ope          ::= let:l SEMICOLON
+                  {: RESULT = new Tope(l); :}
+                | if:i SEMICOLON
+                  {: RESULT = new Tope(i); :}
+                 ;
+
+exp           ::= value:n
+                  {: RESULT = n; :}
+                | ident:i
+                  {: RESULT = i; :}
+                | string:s
+                  {: RESULT = s; :}
+                | LPAR exp:e RPAR
+                  {: RESULT = e; :}
+                | LEFTB explist:e RIGHTB
+                  {: RESULT = new Texplist(e); :}
+                | LEFTB RIGHTB
+                  {: RESULT = new Texplist(); :}
+                | exp:l PLUS exp:r
+                  {: RESULT = new Texpinfix(l,'+',r); :}
+                | exp:l TIMES exp:r
+                  {: RESULT = new Texpinfix(l,'*',r); :}
+                | exp:l DIV exp:r
+                  {: RESULT = new Texpinfix(l,'/',r); :}
+                | exp:l MINUS exp:r
+                  {: RESULT = new Texpinfix(l,'-',r); :}
+                | SIGMA LPAR exp:e RPAR
+                  {: RESULT = new Tsigma(e); :}
+                ;
+
+boolexp       ::= 
+                  TRUE
+                  {: RESULT = new Tboolexp(true); :}
+                | FALSE
+                  {: RESULT = new Tboolexp(false); :}
+                | exp:l EQ exp:r
+                  {: RESULT = new Tboolexp(l,'=',r); :}
+                | exp:l LE exp:r
+                  {: RESULT = new Tboolexp(l,'<',r); :}
+                | exp:l LEQ exp:r
+                  {: RESULT = new Tboolexp(l,'!',r); :}
+                | exp:l GE exp:r
+                  {: RESULT = new Tboolexp(l,'>',r); :}
+                | exp:l GEQ exp:r
+                  {: RESULT = new Tboolexp(l,'$',r); :}
+                | boolexp:l AND boolexp:r
+                  {: RESULT = new Tboolexp(l,'&',r); :}
+                | boolexp:l OR boolexp:r
+                  {: RESULT = new Tboolexp(l,'|',r); :}
+                ;
+
+ident         ::= ID:n
+                  {: RESULT = new Tident(n); :}
+                ;
+
+value        ::= VALUE:z
+                  {: RESULT = new Tvalue(z); :}
+                ;
+
+string       ::= STRINGLITERAL:s
+                  {: RESULT = new Tstring(s); :}
+                ;
+
+let           ::= ident:i LET exp:e
+                  {: RESULT = new Tlet(i,e); :}
+                  |
+                  CON LET exp:e
+                  {: RESULT = new Tlet(e); :}
+                 ;
+if            ::=
+                  IF boolexp:b THEN opelist:t ELSE opelist:e ENDIF
+                  {: RESULT = new Tifthenelse(b,t,e); :}
+                | IF boolexp:b THEN opelist:t 
+                  {: RESULT = new Tifthenelse(b,t); :}
+                ;

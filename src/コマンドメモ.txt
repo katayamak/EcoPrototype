@@ -1,0 +1,7 @@
+
+
+
+
+flex-1.6.0\bin\jflex.bat scanner.jflex
+
+java -jar java-cup-11a.jar -interface < parser.cup
