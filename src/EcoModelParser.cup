@@ -17,6 +17,7 @@ terminal EQ, LE, LEQ, GE, GEQ, AND, OR;
 terminal String VALUE, ID, STRINGLITERAL;
 terminal TRUE, FALSE;
 terminal IF, THEN, ELSE, ENDIF;
+terminal WHILE, DO, ENDWHILE;
 
 non terminal Tprogram  program;
 non terminal Texplist  explist;
@@ -29,6 +30,8 @@ non terminal Tvalue   value;
 non terminal Tlet   let;
 non terminal Tstring   string;
 non terminal Tifthenelse   if;
+non terminal Tprewhile   prewhile;
+non terminal Tpostwhile  postwhile;
 //non terminal Tsigma   sigma;
 
 
@@ -60,6 +63,10 @@ ope          ::= let:l SEMICOLON
                   {: RESULT = new Tope(l); :}
                 | if:i SEMICOLON
                   {: RESULT = new Tope(i); :}
+                | prewhile:w SEMICOLON
+                  {: RESULT = new Tope(w); :}
+                | postwhile:w SEMICOLON
+                  {: RESULT = new Tope(w); :}
                  ;
 
 exp           ::= value:n
@@ -105,6 +112,8 @@ boolexp       ::=
                   {: RESULT = new Tboolexp(l,'&',r); :}
                 | boolexp:l OR boolexp:r
                   {: RESULT = new Tboolexp(l,'|',r); :}
+                | LPAR boolexp:e RPAR
+                  {: RESULT = e; :}
                 ;
 
 ident         ::= ID:n
@@ -130,4 +139,14 @@ if            ::=
                   {: RESULT = new Tifthenelse(b,t,e); :}
                 | IF boolexp:b THEN opelist:t 
                   {: RESULT = new Tifthenelse(b,t); :}
+                ;
+
+prewhile       ::=
+                  WHILE boolexp:b DO opelist:l ENDWHILE
+                  {: RESULT = new Tprewhile(b, l);  :}
+                ;
+
+postwhile      ::=
+                  DO opelist:l WHILE boolexp:b ENDWHILE
+                  {: RESULT = new Tpostwhile(b, l);  :}
                 ;

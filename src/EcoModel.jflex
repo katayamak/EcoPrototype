@@ -43,15 +43,16 @@ import java_cup.runtime.Symbol;
 %%
 <YYINITIAL> {
 
-	"con"     { return sym(CON); }
-	"true"    { return sym(TRUE); }
-	"false"    { return sym(FALSE); }
+	"con"           { return sym(CON); }
+	"true"          { return sym(TRUE); }
+	"false"         { return sym(FALSE); }
 	"if"            { return sym(IF); }
 	"then"          { return sym(THEN); }
 	"else"          { return sym(ELSE); }
-	"endif"            { return sym(ENDIF); }
-	
-
+	"endif"         { return sym(ENDIF); }
+	"while"         { return sym(WHILE); }
+	"do"            { return sym(DO); }
+	"wend"          { return sym(ENDWHILE); }
 	"["             { return sym(LEFTB); }
 	"]"             { return sym(RIGHTB); }
 	"("             { return sym(LPAR); }
@@ -69,7 +70,7 @@ import java_cup.runtime.Symbol;
 	">"             { return sym(GE); }
 	">="            { return sym(GEQ); }
 	"&"             { return sym(AND); }
-	"\|"             { return sym(OR); }
+	"\|"            { return sym(OR); }
 	\u{03a3}        { return sym(SIGMA); }
 	[0-9]+(\.[0-9]+)?(E[+\-]?[0-9]+)?          
 	                { return sym(VALUE,yytext()); }
