@@ -11,3 +11,20 @@ if 1.0 = 1.0 then a ← 3; else a ← 4; endif;
 con ← a;
 con ← (1.0 + 2.0) * 3.0;
 
+z ← [q, w];
+con ← z;
+
+
+// TODO : while のサポート
+// TODO : インデックス型のサポート
+// TODO : for のサポート
+// TODO : Excel入出力
+// TODO : インデックス指定
+// TODO : forAllの実装
+// TODO : エラー処理
+// TODO : 関数の実装
+// TODO : ABS、INV、TRANSFORM、行列の積
+// TODO : 計算のモニタリング
+// TODO : switch
+// TODO : 配列を配列化（非リスト化）
+// TODO : 

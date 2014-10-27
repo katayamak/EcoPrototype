@@ -58,9 +58,9 @@ class Texplist extends Texp implements AST {
 
 	public String toString() {
 		if (explist != null)
-			return explist + "," + exp;
+			return explist + ", " + exp;
 		else 
-			return exp.toString();
+			return "[" + exp.toString();
 	}
 
 	public void checkcontext(SymTab st) {
