@@ -53,6 +53,8 @@ import java_cup.runtime.Symbol;
 	"while"         { return sym(WHILE); }
 	"do"            { return sym(DO); }
 	"wend"          { return sym(ENDWHILE); }
+	"{"             { return sym(LEFTCB); }
+	"}"             { return sym(RIGHTCB); }
 	"["             { return sym(LEFTB); }
 	"]"             { return sym(RIGHTB); }
 	"("             { return sym(LPAR); }

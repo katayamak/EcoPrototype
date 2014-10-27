@@ -59,71 +59,73 @@ class Tboolexp extends Texp implements AST {
 		if (!e1.getClass().equals(e2.getClass())) {
 			return true;
 		}
-		if (!e1.getClass().equals(Texplist.class)) {
+		if (e1.getClass().equals(Texplist.class)) {
 			throw new Exception("行列同士の大小比較演算は定義されていません。");
 		}
-		if (!e1.getClass().equals(Tstring.class)) {
+		if (e2.getClass().equals(Tstring.class)) {
 			throw new Exception("文字列同士の大小比較演算は定義されていません。");
 		}
 		return false;
 	}
 	
 	public Tboolexp interpret(SymTab st) throws Exception {
+		Texp e1x = e1.interpret(st);
+		Texp e2x = e2.interpret(st);
 		switch (op) {
 		case '=':
-			if (!e1.getClass().equals(e2.getClass())) {
+			if (!e1x.getClass().equals(e2x.getClass())) {
 				return falsevalue;
 			}
-			if (!e1.toString().equals(e2.toString())) {
+			if (!e1x.toString().equals(e2x.toString())) {
 				return falsevalue;
 			}
 			return truevalue;
 		case '<':
-			if (isBadType(e1, e2)) {
+			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1).getValue() < ((Tvalue)e1).getValue()) {
+			if (((Tvalue)e1x).getValue() < ((Tvalue)e2x).getValue()) {
 				return truevalue;
 			}
 			return falsevalue;
 		case '!':   // <=
-			if (isBadType(e1, e2)) {
+			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1).getValue() <= ((Tvalue)e1).getValue()) {
+			if (((Tvalue)e1x).getValue() <= ((Tvalue)e2x).getValue()) {
 				return truevalue;
 			}
 			return falsevalue;
 		case '>':
-			if (isBadType(e1, e2)) {
+			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1).getValue() > ((Tvalue)e1).getValue()) {
+			if (((Tvalue)e1x).getValue() > ((Tvalue)e2x).getValue()) {
 				return truevalue;
 			}
 			return falsevalue;
 		case '$':	// >=
-			if (isBadType(e1, e2)) {
+			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1).getValue() >= ((Tvalue)e1).getValue()) {
+			if (((Tvalue)e1x).getValue() >= ((Tvalue)e2x).getValue()) {
 				return truevalue;
 			}
 			return falsevalue;
 		case '&':	// AND
-			if (!e1.getClass().equals(Tboolexp.class) || !e2.getClass().equals(Tboolexp.class)) {
+			if (!e1x.getClass().equals(Tboolexp.class) || !e2x.getClass().equals(Tboolexp.class)) {
 				throw new Exception("and演算にはbool型が必要です。");
 			}
-			if (((Tboolexp)e1).getValue() && ((Tboolexp)e1).getValue()) {
+			if (((Tboolexp)e1x).getValue() && ((Tboolexp)e2x).getValue()) {
 				return truevalue;
 			} else {
 				return falsevalue;
 			}
 		case '|':	//	OR
-			if (!e1.getClass().equals(Tboolexp.class) || !e2.getClass().equals(Tboolexp.class)) {
+			if (!e1x.getClass().equals(Tboolexp.class) || !e2x.getClass().equals(Tboolexp.class)) {
 				throw new Exception("or演算にはbool型が必要です。");
 			}
-			if (((Tboolexp)e1).getValue() || ((Tboolexp)e1).getValue()) {
+			if (((Tboolexp)e1x).getValue() || ((Tboolexp)e2x).getValue()) {
 				return truevalue;
 			} else {
 				return falsevalue;

@@ -15,16 +15,16 @@
  * the paramaters and their arity.
  */ 
 class Tpostwhile implements AST {
-	Tboolexp b;               // 脱出条件
+	Tboolexp boolexp;               // 脱出条件
 	Topelist ol;                   // function body
 
 	public Tpostwhile(Tboolexp b, Topelist ol) {
-		this.b = b;
+		this.boolexp = b;
 		this.ol = ol;
 	}
 
 	public String toString() {
-		return ("while (" + b + ") {"+ ol + "}");
+		return ("while (" + boolexp + ") {"+ ol + "}");
 	}
 
 	SymTab params;              // symbol table of the parameters 
@@ -57,19 +57,11 @@ class Tpostwhile implements AST {
 	}
 
 	public SymTab interpret(SymTab st) throws Exception {
-//		if (ident == null) {
-//			String name = "";
-//			if (exp.getClass().equals(Tident.class)) {
-//				name = "(" + ((Tident)exp).name + ")  ";
-//			}
-//			System.out.println("ConOut : " + name + exp.interpret(st).toString());
-//			return st;
-//		} else {
-//			SymTab newWorld = new SymTab(st);
-//			newWorld.enter(ident.name, new STEvar(ident.name, exp.interpret(st)));
-//			return newWorld;
-//		}
-		return st;
+		SymTab s = st;
+		do  { 
+			s = ol.interpret(s);
+		} while (boolexp.interpret(s).getValue());
+		return s;
 	}
 }
 

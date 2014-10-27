@@ -11,7 +11,7 @@
 // definition of tokens, if applicable with token type 
 terminal CON, LET, SIGMA;
 terminal LEFTB, RIGHTB, COMMA, SEMICOLON;
-terminal LPAR, RPAR;
+terminal LPAR, RPAR, LEFTCB, RIGHTCB;
 terminal MINUS, PLUS, TIMES, DIV, UMINUS;
 terminal EQ, LE, LEQ, GE, GEQ, AND, OR;
 terminal String VALUE, ID, STRINGLITERAL;
@@ -142,11 +142,11 @@ if            ::=
                 ;
 
 prewhile       ::=
-                  WHILE boolexp:b DO opelist:l ENDWHILE
+                  WHILE LPAR boolexp:b RPAR LEFTCB opelist:l RIGHTCB
                   {: RESULT = new Tprewhile(b, l);  :}
                 ;
 
 postwhile      ::=
-                  DO opelist:l WHILE boolexp:b ENDWHILE
+                  DO LEFTCB opelist:l RIGHTCB WHILE LPAR boolexp:b RPAR 
                   {: RESULT = new Tpostwhile(b, l);  :}
                 ;
