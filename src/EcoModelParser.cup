@@ -14,7 +14,7 @@ terminal LEFTB, RIGHTB, COMMA, SEMICOLON;
 terminal LPAR, RPAR, LEFTCB, RIGHTCB;
 terminal MINUS, PLUS, TIMES, DIV, UMINUS;
 terminal EQ, LE, LEQ, GE, GEQ, AND, OR;
-terminal String VALUE, ID, STRINGLITERAL;
+terminal String VALUE, INDEX, ID, STRINGLITERAL;
 terminal TRUE, FALSE;
 terminal IF, THEN, ELSE, ENDIF;
 terminal WHILE, DO, ENDWHILE;
@@ -27,6 +27,7 @@ non terminal Texp      exp;
 non terminal Tboolexp  boolexp;
 non terminal Tident    ident;
 non terminal Tvalue   value;
+non terminal Tindex   index;
 non terminal Tlet   let;
 non terminal Tstring   string;
 non terminal Tifthenelse   if;
@@ -71,6 +72,8 @@ ope          ::= let:l SEMICOLON
 
 exp           ::= value:n
                   {: RESULT = n; :}
+                | index:i
+                  {: RESULT = i; :}
                 | ident:i
                   {: RESULT = i; :}
                 | string:s
@@ -122,6 +125,10 @@ ident         ::= ID:n
 
 value        ::= VALUE:z
                   {: RESULT = new Tvalue(z); :}
+                ;
+
+index        ::= INDEX:z
+                  {: RESULT = new Tindex(z); :}
                 ;
 
 string       ::= STRINGLITERAL:s

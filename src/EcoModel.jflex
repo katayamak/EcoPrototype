@@ -74,6 +74,7 @@ import java_cup.runtime.Symbol;
 	"&"             { return sym(AND); }
 	"\|"            { return sym(OR); }
 	\u{03a3}        { return sym(SIGMA); }
+	[0-9]+          { return sym(INDEX,yytext()); }
 	[0-9]+(\.[0-9]+)?(E[+\-]?[0-9]+)?          
 	                { return sym(VALUE,yytext()); }
 

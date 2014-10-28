@@ -36,11 +36,16 @@ class Texpinfix extends Texp implements AST {
 	}
 
 	@FunctionalInterface
-	private interface BinOp {
+	private interface DoubleBinOp {
 		public Double apply(Double a, Double b);
 	}
 
-	private Texp operate(Texp val1, Texp val2, BinOp f) throws Exception
+	@FunctionalInterface
+	private interface IntBinOp {
+		public Double apply(Integer a, Integer b);
+	}
+
+	private Texp operate(Texp val1, Texp val2, DoubleBinOp f) throws Exception
 	{
 		if (val1 == null && val2 == null) {
 			return null;
@@ -56,8 +61,30 @@ class Texpinfix extends Texp implements AST {
 			Double dvalue1 = ((Tvalue)val1).getValue();
 			if (val2.getClass().equals(Tvalue.class)) {
 				return new Tvalue(f.apply(dvalue1, ((Tvalue)val2).getValue()));
+			} else if (val2.getClass().equals(Tindex.class)) {
+				return new Tvalue(f.apply(dvalue1, ((Tindex)val2).getValue().doubleValue()));
 			} else if (val2.getClass().equals(Tstring.class)) {
 				return new Tstring(dvalue1.toString() + val2.toString());
+			} else {
+				Texplist vl = (Texplist)val2;
+				if (vl.getHead() == null) {
+					return vl;
+				} else {
+					if (vl.getTail() == null) {
+						return new Texplist(operate(val1, vl.getHead(), f));
+					} else {
+						return new Texplist((Texplist)operate(val1, vl.getTail(), f), operate(val1, vl.getHead(), f));
+					}
+				}
+			}
+		} else if (val1.getClass().equals(Tindex.class)) {
+			Integer ivalue1 = ((Tindex)val1).getValue();
+			if (val2.getClass().equals(Tvalue.class)) {
+				return new Tvalue(f.apply(ivalue1.doubleValue(), ((Tvalue)val2).getValue()));
+			} else if (val2.getClass().equals(Tindex.class)) {
+				return new Tvalue(f.apply(ivalue1.doubleValue(), ((Tindex)val2).getValue().doubleValue()));
+			} else if (val2.getClass().equals(Tstring.class)) {
+				return new Tstring(ivalue1.toString() + val2.toString());
 			} else {
 				Texplist vl = (Texplist)val2;
 				if (vl.getHead() == null) {
@@ -75,6 +102,8 @@ class Texpinfix extends Texp implements AST {
 			if (val2.getClass().equals(Tstring.class)) {
 				return new Tstring(svalue1 + val2.toString());
 			} else if (val2.getClass().equals(Tvalue.class)) {
+				return new Tstring(svalue1 + val2.toString());
+			} else if (val2.getClass().equals(Tindex.class)) {
 				return new Tstring(svalue1 + val2.toString());
 			} else {
 				Texplist vl = (Texplist)val2;

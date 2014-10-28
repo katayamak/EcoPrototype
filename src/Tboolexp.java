@@ -84,32 +84,56 @@ class Tboolexp extends Texp implements AST {
 			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1x).getValue() < ((Tvalue)e2x).getValue()) {
-				return truevalue;
+			if (e1x.getClass().equals(Tvalue.class)) {
+				if (((Tvalue)e1x).getValue() < ((Tvalue)e2x).getValue()) {
+					return truevalue;
+				}
+			} else {
+				if (((Tindex)e1x).getValue() < ((Tindex)e2x).getValue()) {
+					return truevalue;
+				}
 			}
 			return falsevalue;
 		case '!':   // <=
 			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1x).getValue() <= ((Tvalue)e2x).getValue()) {
-				return truevalue;
+			if (e1x.getClass().equals(Tvalue.class)) {
+				if (((Tvalue)e1x).getValue() <= ((Tvalue)e2x).getValue()) {
+					return truevalue;
+				}
+			} else {
+				if (((Tindex)e1x).getValue() <= ((Tindex)e2x).getValue()) {
+					return truevalue;
+				}
 			}
 			return falsevalue;
 		case '>':
 			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1x).getValue() > ((Tvalue)e2x).getValue()) {
-				return truevalue;
+			if (e1x.getClass().equals(Tvalue.class)) {
+				if (((Tvalue)e1x).getValue() > ((Tvalue)e2x).getValue()) {
+					return truevalue;
+				}
+			} else {
+				if (((Tindex)e1x).getValue() > ((Tindex)e2x).getValue()) {
+					return truevalue;
+				}
 			}
 			return falsevalue;
 		case '$':	// >=
 			if (isBadType(e1x, e2x)) {
 				return falsevalue;
 			}
-			if (((Tvalue)e1x).getValue() >= ((Tvalue)e2x).getValue()) {
-				return truevalue;
+			if (e1x.getClass().equals(Tvalue.class)) {
+				if (((Tvalue)e1x).getValue() >= ((Tvalue)e2x).getValue()) {
+					return truevalue;
+				}
+			} else {
+				if (((Tindex)e1x).getValue() >= ((Tindex)e2x).getValue()) {
+					return truevalue;
+				}
 			}
 			return falsevalue;
 		case '&':	// AND

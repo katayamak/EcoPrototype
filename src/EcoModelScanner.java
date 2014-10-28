@@ -69,8 +69,8 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
     "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27"+
     "\1\30\1\31\1\32\1\0\6\2\1\33\1\34\2\2"+
     "\1\35\1\36\1\37\2\0\1\40\1\41\1\42\1\43"+
-    "\1\44\1\45\7\2\1\26\1\0\1\26\1\46\1\47"+
-    "\1\2\1\50\1\2\1\51\1\2\1\52\1\53\1\54";
+    "\1\44\1\45\7\2\1\46\1\0\1\46\1\47\1\50"+
+    "\1\2\1\51\1\2\1\52\1\2\1\53\1\54\1\55";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[77];
@@ -688,181 +688,185 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
         case 1: 
           { throw new Error("Unexpected character ["+yytext()+"]");
           }
-        case 45: break;
+        case 46: break;
         case 2: 
           { symtab.enter(yytext(),new SymtabEntry(yytext()));
 	                  return sym(ID,yytext());
           }
-        case 46: break;
+        case 47: break;
         case 3: 
           { return sym(LEFTCB);
           }
-        case 47: break;
+        case 48: break;
         case 4: 
           { return sym(RIGHTCB);
           }
-        case 48: break;
+        case 49: break;
         case 5: 
           { return sym(LEFTB);
           }
-        case 49: break;
+        case 50: break;
         case 6: 
           { return sym(RIGHTB);
           }
-        case 50: break;
+        case 51: break;
         case 7: 
           { return sym(LPAR);
           }
-        case 51: break;
+        case 52: break;
         case 8: 
           { return sym(RPAR);
           }
-        case 52: break;
+        case 53: break;
         case 9: 
           { return sym(COMMA);
           }
-        case 53: break;
+        case 54: break;
         case 10: 
           { return sym(SEMICOLON);
           }
-        case 54: break;
+        case 55: break;
         case 11: 
           { return sym(MINUS);
           }
-        case 55: break;
+        case 56: break;
         case 12: 
           { return sym(PLUS);
           }
-        case 56: break;
+        case 57: break;
         case 13: 
           { return sym(TIMES);
           }
-        case 57: break;
+        case 58: break;
         case 14: 
           { return sym(DIV);
           }
-        case 58: break;
+        case 59: break;
         case 15: 
           { string.setLength(0); yybegin(STRING);
           }
-        case 59: break;
+        case 60: break;
         case 16: 
           { return sym(EQ);
           }
-        case 60: break;
+        case 61: break;
         case 17: 
           { return sym(LE);
           }
-        case 61: break;
+        case 62: break;
         case 18: 
           { return sym(GE);
           }
-        case 62: break;
+        case 63: break;
         case 19: 
           { return sym(AND);
           }
-        case 63: break;
+        case 64: break;
         case 20: 
           { return sym(OR);
           }
-        case 64: break;
+        case 65: break;
         case 21: 
           { return sym(SIGMA);
           }
-        case 65: break;
-        case 22: 
-          { return sym(VALUE,yytext());
-          }
         case 66: break;
+        case 22: 
+          { return sym(INDEX,yytext());
+          }
+        case 67: break;
         case 23: 
           { symtab.enter(yytext(),new SymtabEntry(yytext()));
 	                  return sym(LET);
           }
-        case 67: break;
+        case 68: break;
         case 24: 
           { /* eat whitespace */
           }
-        case 68: break;
+        case 69: break;
         case 25: 
           { string.append( yytext() );
           }
-        case 69: break;
+        case 70: break;
         case 26: 
           { yybegin(YYINITIAL); return sym(STRINGLITERAL, string.toString());
           }
-        case 70: break;
+        case 71: break;
         case 27: 
           { return sym(IF);
           }
-        case 71: break;
+        case 72: break;
         case 28: 
           { return sym(DO);
           }
-        case 72: break;
+        case 73: break;
         case 29: 
           { /* one-line comment */
           }
-        case 73: break;
+        case 74: break;
         case 30: 
           { return sym(LEQ);
           }
-        case 74: break;
+        case 75: break;
         case 31: 
           { return sym(GEQ);
           }
-        case 75: break;
+        case 76: break;
         case 32: 
           { string.append('\n');
           }
-        case 76: break;
+        case 77: break;
         case 33: 
           { string.append('\t');
           }
-        case 77: break;
+        case 78: break;
         case 34: 
           { string.append('\r');
           }
-        case 78: break;
+        case 79: break;
         case 35: 
           { string.append('\"');
           }
-        case 79: break;
+        case 80: break;
         case 36: 
           { string.append('\\');
           }
-        case 80: break;
+        case 81: break;
         case 37: 
           { return sym(CON);
           }
-        case 81: break;
-        case 38: 
-          { return sym(TRUE);
-          }
         case 82: break;
-        case 39: 
-          { return sym(THEN);
+        case 38: 
+          { return sym(VALUE,yytext());
           }
         case 83: break;
-        case 40: 
-          { return sym(ELSE);
+        case 39: 
+          { return sym(TRUE);
           }
         case 84: break;
-        case 41: 
-          { return sym(ENDWHILE);
+        case 40: 
+          { return sym(THEN);
           }
         case 85: break;
-        case 42: 
-          { return sym(ENDIF);
+        case 41: 
+          { return sym(ELSE);
           }
         case 86: break;
-        case 43: 
-          { return sym(FALSE);
+        case 42: 
+          { return sym(ENDWHILE);
           }
         case 87: break;
-        case 44: 
-          { return sym(WHILE);
+        case 43: 
+          { return sym(ENDIF);
           }
         case 88: break;
+        case 44: 
+          { return sym(FALSE);
+          }
+        case 89: break;
+        case 45: 
+          { return sym(WHILE);
+          }
+        case 90: break;
         default: 
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;
