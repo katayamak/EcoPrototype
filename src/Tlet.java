@@ -18,14 +18,22 @@ class Tlet implements AST {
 	Tident ident;               // identifier
 	Texp exp;                   // function body
 
+	private Texp convertIfList(Texp e) {
+		if (e.getClass().equals(Texplist.class)) {
+			return ((Texplist)e).getExpArray();
+		}
+		return e;
+	}
+	
 	public Tlet(Tident i, Texp e) {
 		ident = i;
-		exp = e;
+		
+		exp = e; //convertIfList(e);
 	}
 	
 	public Tlet(Texp e) {		//	Console out
 		ident = null;
-		exp = e;
+		exp = e; //convertIfList(e);
 	}
 
 	public String toString() {

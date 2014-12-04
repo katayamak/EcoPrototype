@@ -49,4 +49,6 @@ con ← sum;
 // TODO : 計算のモニタリング
 // TODO : switch
 // TODO : 配列を配列化（非リスト化）
-// TODO : 
+// TODO : Include
+// TODO : シンボルテーブルの効率化
+

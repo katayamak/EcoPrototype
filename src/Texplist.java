@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -42,6 +44,12 @@ class Texplist extends Texp implements AST {
 		explist = null;
 		exp = null;
 	}
+
+	public TexpArray getExpArray() {
+		return new TexpArray(this);
+	}
+
+	
 	
 	public Texplist(Texplist p) {
 		explist = p.getExplist();

@@ -73,7 +73,8 @@ import java_cup.runtime.Symbol;
 	">="            { return sym(GEQ); }
 	"&"             { return sym(AND); }
 	"\|"            { return sym(OR); }
-	\u{03a3}        { return sym(SIGMA); }
+	\u{03a3}        { return sym(SIGMA); }                               // Σ
+	\u{2200}        { return sym(FORALL); }                               // ∀
 	[0-9]+          { return sym(INDEX,yytext()); }
 	[0-9]+(\.[0-9]+)?(E[+\-]?[0-9]+)?          
 	                { return sym(VALUE,yytext()); }
@@ -82,7 +83,7 @@ import java_cup.runtime.Symbol;
 	                { symtab.enter(yytext(),new SymtabEntry(yytext()));
 	                  return sym(ID,yytext()); }
 
-	\u{2190}        { symtab.enter(yytext(),new SymtabEntry(yytext()));
+	\u{2190}        { symtab.enter(yytext(),new SymtabEntry(yytext()));   // ←
 	                  return sym(LET); }
 	[\ \t\b\f\r\n]+ { /* eat whitespace */ }
 	"//"[^\n]*      { /* one-line comment */ }

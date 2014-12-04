@@ -35,24 +35,34 @@ class Texpinfix extends Texp implements AST {
 		exp2.prepInterp(st);
 	}
 
-	@FunctionalInterface
-	private interface DoubleBinOp {
-		public Double apply(Double a, Double b);
-	}
+//	@FunctionalInterface
+//	private interface DoubleBinOp {
+//		public Double apply(Double a, Double b);
+//	}
+//
+//	@FunctionalInterface
+//	private interface IntBinOp {
+//		public Double apply(Integer a, Integer b);
+//	}
 
-	@FunctionalInterface
-	private interface IntBinOp {
-		public Double apply(Integer a, Integer b);
+	private double calc (double a, double b, char f) {
+		switch (kind) {
+		case '+': return a + b;
+		case '-': return a - b;
+		case '*': return a * b;
+		case '/': return a / b;
+		}
+		return 0.0;
 	}
-
-	private Texp operate(Texp val1, Texp val2, DoubleBinOp f) throws Exception
+	
+	private Texp operate(Texp val1, Texp val2, char f) throws Exception
 	{
 		if (val1 == null && val2 == null) {
 			return null;
 		} else if (val1 == null || val2 == null) {
 			throw new Exception ("配列の要素数が異なっています");
 		} 
-		if ((val1.getClass().equals(Tstring.class) || val2.getClass().equals(Tstring.class)) && f.apply(1.0, 1.0) != 2.0) {	//	文字列は＋のみ許可
+		if ((val1.getClass().equals(Tstring.class) || val2.getClass().equals(Tstring.class)) && calc(1.0, 1.0, f) != 2.0) {	//	文字列は＋のみ許可
 			throw new Exception ("文字列は加算のみ可能です");
 		}
 		
@@ -60,9 +70,9 @@ class Texpinfix extends Texp implements AST {
 		if (val1.getClass().equals(Tvalue.class)) {
 			Double dvalue1 = ((Tvalue)val1).getValue();
 			if (val2.getClass().equals(Tvalue.class)) {
-				return new Tvalue(f.apply(dvalue1, ((Tvalue)val2).getValue()));
+				return new Tvalue(calc(dvalue1, ((Tvalue)val2).getValue(), f));
 			} else if (val2.getClass().equals(Tindex.class)) {
-				return new Tvalue(f.apply(dvalue1, ((Tindex)val2).getValue().doubleValue()));
+				return new Tvalue(calc(dvalue1, ((Tindex)val2).getValue().doubleValue(), f));
 			} else if (val2.getClass().equals(Tstring.class)) {
 				return new Tstring(dvalue1.toString() + val2.toString());
 			} else {
@@ -80,9 +90,9 @@ class Texpinfix extends Texp implements AST {
 		} else if (val1.getClass().equals(Tindex.class)) {
 			Integer ivalue1 = ((Tindex)val1).getValue();
 			if (val2.getClass().equals(Tvalue.class)) {
-				return new Tvalue(f.apply(ivalue1.doubleValue(), ((Tvalue)val2).getValue()));
+				return new Tvalue(calc(ivalue1.doubleValue(), ((Tvalue)val2).getValue(), f));
 			} else if (val2.getClass().equals(Tindex.class)) {
-				return new Tvalue(f.apply(ivalue1.doubleValue(), ((Tindex)val2).getValue().doubleValue()));
+				return new Tvalue(calc(ivalue1.doubleValue(), ((Tindex)val2).getValue().doubleValue(), f));
 			} else if (val2.getClass().equals(Tstring.class)) {
 				return new Tstring(ivalue1.toString() + val2.toString());
 			} else {
@@ -153,15 +163,16 @@ class Texpinfix extends Texp implements AST {
 	public Texp interpret(SymTab st) throws Exception {    
 		Texp e1 = exp1.interpret(st);
 		Texp e2 = exp2.interpret(st);
+		return (operate(e1, e2, kind));
+		
+//		switch (kind) {
+//		case '+': return (operate(e1, e2, (a, b) -> a + b));
+//		case '-': return (operate(e1, e2, (a, b) -> a - b));
+//		case '*': return (operate(e1, e2, (a, b) -> a * b));
+//		case '/': return (operate(e1, e2, (a, b) -> a / b));
+//		}
 
-		switch (kind) {
-		case '+': return (operate(e1, e2, (a, b) -> a + b));
-		case '-': return (operate(e1, e2, (a, b) -> a - b));
-		case '*': return (operate(e1, e2, (a, b) -> a * b));
-		case '/': return (operate(e1, e2, (a, b) -> a / b));
-		}
-
-		return new Tvalue(-1.0);        // error
+//		return new Tvalue(-1.0);        // error
 	}
 }
 
