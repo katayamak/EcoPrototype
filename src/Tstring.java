@@ -30,8 +30,31 @@ class Tstring extends Texp implements AST {
 	}
 
 	public void prepInterp(SymTab st) { 
+		
 	}
-
+	
+	public Texp binop(Texp val2, char f) {
+		String svalue1 = s;
+		if (val2.getClass().equals(Tstring.class)) {
+			return new Tstring(svalue1 + val2.toString());
+		} else if (val2.getClass().equals(Tvalue.class)) {
+			return new Tstring(svalue1 + val2.toString());
+		} else if (val2.getClass().equals(Tindex.class)) {
+			return new Tstring(svalue1 + val2.toString());
+		} else {
+			Texplist vl = (Texplist)val2;
+			if (vl.getHead() == null) {
+				return vl;
+			} else {
+				if (vl.getTail() == null) {
+					return new Texplist(binop(vl.getHead(), f));
+				} else {
+					return new Texplist((Texplist)binop(vl.getTail(), f), binop(vl.getHead(), f));
+				}
+			}
+		}
+	}
+	
 	public Texp interpret(SymTab st) {
 		return this;
 	}

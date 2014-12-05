@@ -28,5 +28,8 @@ abstract class Texp implements AST {
   
   // interpretation
   abstract public Texp interpret(SymTab st) throws Exception;
+
+  abstract public Texp binop(Texp val2, char f) throws Exception;
+
 }
 

@@ -55,6 +55,8 @@ import java_cup.runtime.Symbol;
 	"wend"          { return sym(ENDWHILE); }
 	"{"             { return sym(LEFTCB); }
 	"}"             { return sym(RIGHTCB); }
+	"[|"            { return sym(LEFTAR); }
+	"|]"            { return sym(RIGHTAR); }
 	"["             { return sym(LEFTB); }
 	"]"             { return sym(RIGHTB); }
 	"("             { return sym(LPAR); }

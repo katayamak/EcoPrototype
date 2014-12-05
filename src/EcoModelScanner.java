@@ -44,12 +44,12 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\10\0\2\51\1\52\1\54\1\51\1\53\22\0\1\51\1\0\1\34"+
-    "\3\0\1\40\1\0\1\24\1\25\1\32\1\31\1\26\1\30\1\45"+
-    "\1\33\12\44\1\0\1\27\1\36\1\35\1\37\2\0\4\47\1\46"+
-    "\25\47\1\22\1\55\1\23\3\0\1\11\1\47\1\1\1\16\1\7"+
+    "\10\0\2\51\1\52\1\54\1\51\1\53\22\0\1\51\1\0\1\35"+
+    "\3\0\1\41\1\0\1\25\1\26\1\33\1\32\1\27\1\31\1\45"+
+    "\1\34\12\44\1\0\1\30\1\37\1\36\1\40\2\0\4\47\1\46"+
+    "\25\47\1\22\1\55\1\24\3\0\1\11\1\47\1\1\1\16\1\7"+
     "\1\10\1\47\1\15\1\14\2\47\1\12\1\47\1\3\1\2\2\47"+
-    "\1\5\1\13\1\4\1\6\1\47\1\17\3\47\1\20\1\41\1\21"+
+    "\1\5\1\13\1\4\1\6\1\47\1\17\3\47\1\20\1\23\1\21"+
     "\7\0\1\54\u030b\0\22\47\1\42\46\47\u1c5e\0\1\54\1\54\u0166\0"+
     "\1\50\157\0\1\43\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\ude0f\0";
 
@@ -68,13 +68,13 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
     "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
     "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27"+
     "\1\30\1\31\1\32\1\33\1\0\6\2\1\34\1\35"+
-    "\2\2\1\36\1\37\1\40\2\0\1\41\1\42\1\43"+
-    "\1\44\1\45\1\46\7\2\1\47\1\0\1\47\1\50"+
-    "\1\51\1\2\1\52\1\2\1\53\1\2\1\54\1\55"+
-    "\1\56";
+    "\2\2\1\36\1\37\1\40\1\41\1\42\2\0\1\43"+
+    "\1\44\1\45\1\46\1\47\1\50\7\2\1\51\1\0"+
+    "\1\51\1\52\1\53\1\2\1\54\1\2\1\55\1\2"+
+    "\1\56\1\57\1\60";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[78];
+    int [] result = new int[80];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -100,18 +100,18 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\56\0\134\0\212\0\270\0\346\0\u0114\0\u0142"+
-    "\0\u0170\0\u019e\0\u01cc\0\134\0\134\0\134\0\134\0\134"+
-    "\0\134\0\134\0\134\0\134\0\134\0\134\0\u01fa\0\134"+
-    "\0\134\0\u0228\0\u0256\0\134\0\270\0\270\0\134\0\u0284"+
-    "\0\134\0\u02b2\0\u02e0\0\134\0\u030e\0\u033c\0\u036a\0\u0398"+
-    "\0\u03c6\0\u03f4\0\u0422\0\270\0\270\0\u0450\0\u047e\0\u04ac"+
-    "\0\134\0\134\0\u04da\0\u0508\0\134\0\134\0\134\0\134"+
-    "\0\134\0\270\0\u0536\0\u0564\0\u0592\0\u05c0\0\u05ee\0\u061c"+
-    "\0\u064a\0\u0678\0\u06a6\0\u06a6\0\270\0\270\0\u06d4\0\270"+
-    "\0\u0702\0\270\0\u0730\0\270\0\270\0\270";
+    "\0\u0170\0\u019e\0\u01cc\0\134\0\134\0\u01fa\0\u0228\0\134"+
+    "\0\134\0\134\0\134\0\134\0\134\0\134\0\134\0\u0256"+
+    "\0\134\0\134\0\u0284\0\u02b2\0\134\0\270\0\134\0\u02e0"+
+    "\0\134\0\u030e\0\u033c\0\134\0\u036a\0\u0398\0\u03c6\0\u03f4"+
+    "\0\u0422\0\u0450\0\u047e\0\270\0\270\0\u04ac\0\u04da\0\134"+
+    "\0\134\0\u0508\0\134\0\134\0\u0536\0\u0564\0\134\0\134"+
+    "\0\134\0\134\0\134\0\270\0\u0592\0\u05c0\0\u05ee\0\u061c"+
+    "\0\u064a\0\u0678\0\u06a6\0\u06d4\0\u0702\0\u0702\0\270\0\270"+
+    "\0\u0730\0\270\0\u075e\0\270\0\u078c\0\270\0\270\0\270";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[78];
+    int [] result = new int[80];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -138,49 +138,58 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
     "\1\11\1\5\1\12\1\13\1\14\1\15\1\16\1\17"+
     "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27"+
     "\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37"+
-    "\1\40\1\3\2\5\1\41\3\42\1\0\1\3\34\43"+
-    "\1\44\15\43\2\0\1\43\1\45\57\0\1\5\1\46"+
-    "\15\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\17\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\4\5\1\47\7\5\1\50\2\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\7\0\2\5\1\51\6\5\1\52"+
-    "\5\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\10\5\1\53\6\5\21\0\2\5\1\0\1\5\1\0"+
-    "\2\5\7\0\7\5\1\54\7\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\7\0\1\5\1\55\15\5\21\0"+
-    "\2\5\1\0\1\5\1\0\2\5\7\0\6\5\1\56"+
-    "\5\5\1\57\2\5\21\0\2\5\1\0\1\5\1\0"+
-    "\2\5\41\0\1\60\57\0\1\61\55\0\1\62\64\0"+
-    "\1\40\1\63\1\64\60\0\3\42\2\0\34\43\1\0"+
-    "\15\43\2\0\1\43\4\0\1\65\1\66\1\67\26\0"+
-    "\1\70\20\0\1\71\1\0\2\5\1\72\14\5\21\0"+
-    "\2\5\1\0\1\5\1\0\2\5\7\0\5\5\1\73"+
-    "\11\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\6\5\1\74\10\5\21\0\2\5\1\0\1\5\1\0"+
-    "\2\5\7\0\15\5\1\75\1\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\7\0\12\5\1\76\4\5\21\0"+
-    "\2\5\1\0\1\5\1\0\2\5\7\0\11\5\1\77"+
-    "\5\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\2\5\1\100\14\5\21\0\2\5\1\0\1\5\1\0"+
-    "\2\5\7\0\13\5\1\101\3\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\6\0\52\60\1\0\3\60\44\0"+
-    "\1\102\41\0\2\103\12\0\1\104\12\0\6\5\1\105"+
-    "\10\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\2\5\1\106\14\5\21\0\2\5\1\0\1\5\1\0"+
-    "\2\5\7\0\13\5\1\107\3\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\7\0\6\5\1\110\10\5\21\0"+
-    "\2\5\1\0\1\5\1\0\2\5\7\0\12\5\1\111"+
-    "\4\5\21\0\2\5\1\0\1\5\1\0\2\5\7\0"+
-    "\15\5\1\112\1\5\21\0\2\5\1\0\1\5\1\0"+
-    "\2\5\7\0\11\5\1\113\5\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\52\0\1\102\1\0\1\64\53\0"+
-    "\1\104\12\0\7\5\1\114\7\5\21\0\2\5\1\0"+
-    "\1\5\1\0\2\5\7\0\6\5\1\115\10\5\21\0"+
-    "\2\5\1\0\1\5\1\0\2\5\7\0\6\5\1\116"+
-    "\10\5\21\0\2\5\1\0\1\5\1\0\2\5\6\0";
+    "\1\40\1\3\2\5\1\41\3\42\1\0\1\3\35\43"+
+    "\1\44\14\43\2\0\1\43\1\45\57\0\1\5\1\46"+
+    "\15\5\3\0\1\5\16\0\1\5\1\0\1\5\1\0"+
+    "\2\5\7\0\17\5\3\0\1\5\16\0\1\5\1\0"+
+    "\1\5\1\0\2\5\7\0\4\5\1\47\7\5\1\50"+
+    "\2\5\3\0\1\5\16\0\1\5\1\0\1\5\1\0"+
+    "\2\5\7\0\2\5\1\51\6\5\1\52\5\5\3\0"+
+    "\1\5\16\0\1\5\1\0\1\5\1\0\2\5\7\0"+
+    "\10\5\1\53\6\5\3\0\1\5\16\0\1\5\1\0"+
+    "\1\5\1\0\2\5\7\0\7\5\1\54\7\5\3\0"+
+    "\1\5\16\0\1\5\1\0\1\5\1\0\2\5\7\0"+
+    "\1\5\1\55\15\5\3\0\1\5\16\0\1\5\1\0"+
+    "\1\5\1\0\2\5\7\0\6\5\1\56\5\5\1\57"+
+    "\2\5\3\0\1\5\16\0\1\5\1\0\1\5\1\0"+
+    "\2\5\31\0\1\60\33\0\17\5\3\0\1\5\1\61"+
+    "\15\0\1\5\1\0\1\5\1\0\2\5\42\0\1\62"+
+    "\57\0\1\63\55\0\1\64\63\0\1\40\1\65\1\66"+
+    "\60\0\3\42\2\0\35\43\1\0\14\43\2\0\1\43"+
+    "\4\0\1\67\1\70\1\71\27\0\1\72\17\0\1\73"+
+    "\1\0\2\5\1\74\14\5\3\0\1\5\16\0\1\5"+
+    "\1\0\1\5\1\0\2\5\7\0\5\5\1\75\11\5"+
+    "\3\0\1\5\16\0\1\5\1\0\1\5\1\0\2\5"+
+    "\7\0\6\5\1\76\10\5\3\0\1\5\16\0\1\5"+
+    "\1\0\1\5\1\0\2\5\7\0\15\5\1\77\1\5"+
+    "\3\0\1\5\16\0\1\5\1\0\1\5\1\0\2\5"+
+    "\7\0\12\5\1\100\4\5\3\0\1\5\16\0\1\5"+
+    "\1\0\1\5\1\0\2\5\7\0\11\5\1\101\5\5"+
+    "\3\0\1\5\16\0\1\5\1\0\1\5\1\0\2\5"+
+    "\7\0\2\5\1\102\14\5\3\0\1\5\16\0\1\5"+
+    "\1\0\1\5\1\0\2\5\7\0\13\5\1\103\3\5"+
+    "\3\0\1\5\16\0\1\5\1\0\1\5\1\0\2\5"+
+    "\6\0\52\62\1\0\3\62\44\0\1\104\42\0\2\105"+
+    "\11\0\1\106\12\0\6\5\1\107\10\5\3\0\1\5"+
+    "\16\0\1\5\1\0\1\5\1\0\2\5\7\0\2\5"+
+    "\1\110\14\5\3\0\1\5\16\0\1\5\1\0\1\5"+
+    "\1\0\2\5\7\0\13\5\1\111\3\5\3\0\1\5"+
+    "\16\0\1\5\1\0\1\5\1\0\2\5\7\0\6\5"+
+    "\1\112\10\5\3\0\1\5\16\0\1\5\1\0\1\5"+
+    "\1\0\2\5\7\0\12\5\1\113\4\5\3\0\1\5"+
+    "\16\0\1\5\1\0\1\5\1\0\2\5\7\0\15\5"+
+    "\1\114\1\5\3\0\1\5\16\0\1\5\1\0\1\5"+
+    "\1\0\2\5\7\0\11\5\1\115\5\5\3\0\1\5"+
+    "\16\0\1\5\1\0\1\5\1\0\2\5\52\0\1\104"+
+    "\1\0\1\66\53\0\1\106\12\0\7\5\1\116\7\5"+
+    "\3\0\1\5\16\0\1\5\1\0\1\5\1\0\2\5"+
+    "\7\0\6\5\1\117\10\5\3\0\1\5\16\0\1\5"+
+    "\1\0\1\5\1\0\2\5\7\0\6\5\1\120\10\5"+
+    "\3\0\1\5\16\0\1\5\1\0\1\5\1\0\2\5"+
+    "\6\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1886];
+    int [] result = new int[1978];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -218,12 +227,13 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\1\11\10\1\13\11\1\1\2\11\2\1\1\11"+
-    "\2\1\1\11\1\1\1\11\2\1\1\11\1\0\13\1"+
-    "\2\11\2\0\5\11\11\1\1\0\13\1";
+    "\2\0\1\11\10\1\2\11\2\1\10\11\1\1\2\11"+
+    "\2\1\1\11\1\1\1\11\1\1\1\11\2\1\1\11"+
+    "\1\0\12\1\2\11\1\1\2\11\2\0\5\11\11\1"+
+    "\1\0\13\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[78];
+    int [] result = new int[80];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -695,189 +705,197 @@ class EcoModelScanner implements java_cup.runtime.Scanner, sym {
         case 1: 
           { throw new Error("Unexpected character ["+yytext()+"]");
           }
-        case 47: break;
+        case 49: break;
         case 2: 
           { symtab.enter(yytext(),new SymtabEntry(yytext()));
 	                  return sym(ID,yytext());
           }
-        case 48: break;
+        case 50: break;
         case 3: 
           { return sym(LEFTCB);
           }
-        case 49: break;
+        case 51: break;
         case 4: 
           { return sym(RIGHTCB);
           }
-        case 50: break;
+        case 52: break;
         case 5: 
           { return sym(LEFTB);
           }
-        case 51: break;
-        case 6: 
-          { return sym(RIGHTB);
-          }
-        case 52: break;
-        case 7: 
-          { return sym(LPAR);
-          }
         case 53: break;
-        case 8: 
-          { return sym(RPAR);
-          }
-        case 54: break;
-        case 9: 
-          { return sym(COMMA);
-          }
-        case 55: break;
-        case 10: 
-          { return sym(SEMICOLON);
-          }
-        case 56: break;
-        case 11: 
-          { return sym(MINUS);
-          }
-        case 57: break;
-        case 12: 
-          { return sym(PLUS);
-          }
-        case 58: break;
-        case 13: 
-          { return sym(TIMES);
-          }
-        case 59: break;
-        case 14: 
-          { return sym(DIV);
-          }
-        case 60: break;
-        case 15: 
-          { string.setLength(0); yybegin(STRING);
-          }
-        case 61: break;
-        case 16: 
-          { return sym(EQ);
-          }
-        case 62: break;
-        case 17: 
-          { return sym(LE);
-          }
-        case 63: break;
-        case 18: 
-          { return sym(GE);
-          }
-        case 64: break;
-        case 19: 
-          { return sym(AND);
-          }
-        case 65: break;
-        case 20: 
+        case 6: 
           { return sym(OR);
           }
+        case 54: break;
+        case 7: 
+          { return sym(RIGHTB);
+          }
+        case 55: break;
+        case 8: 
+          { return sym(LPAR);
+          }
+        case 56: break;
+        case 9: 
+          { return sym(RPAR);
+          }
+        case 57: break;
+        case 10: 
+          { return sym(COMMA);
+          }
+        case 58: break;
+        case 11: 
+          { return sym(SEMICOLON);
+          }
+        case 59: break;
+        case 12: 
+          { return sym(MINUS);
+          }
+        case 60: break;
+        case 13: 
+          { return sym(PLUS);
+          }
+        case 61: break;
+        case 14: 
+          { return sym(TIMES);
+          }
+        case 62: break;
+        case 15: 
+          { return sym(DIV);
+          }
+        case 63: break;
+        case 16: 
+          { string.setLength(0); yybegin(STRING);
+          }
+        case 64: break;
+        case 17: 
+          { return sym(EQ);
+          }
+        case 65: break;
+        case 18: 
+          { return sym(LE);
+          }
         case 66: break;
+        case 19: 
+          { return sym(GE);
+          }
+        case 67: break;
+        case 20: 
+          { return sym(AND);
+          }
+        case 68: break;
         case 21: 
           { return sym(SIGMA);
           }
-        case 67: break;
+        case 69: break;
         case 22: 
           { return sym(FORALL);
           }
-        case 68: break;
+        case 70: break;
         case 23: 
           { return sym(INDEX,yytext());
           }
-        case 69: break;
+        case 71: break;
         case 24: 
           { symtab.enter(yytext(),new SymtabEntry(yytext()));   // â†?
 	                  return sym(LET);
           }
-        case 70: break;
+        case 72: break;
         case 25: 
           { /* eat whitespace */
           }
-        case 71: break;
+        case 73: break;
         case 26: 
           { string.append( yytext() );
           }
-        case 72: break;
+        case 74: break;
         case 27: 
           { yybegin(YYINITIAL); return sym(STRINGLITERAL, string.toString());
           }
-        case 73: break;
+        case 75: break;
         case 28: 
           { return sym(IF);
           }
-        case 74: break;
+        case 76: break;
         case 29: 
           { return sym(DO);
           }
-        case 75: break;
-        case 30: 
-          { /* one-line comment */
-          }
-        case 76: break;
-        case 31: 
-          { return sym(LEQ);
-          }
         case 77: break;
-        case 32: 
-          { return sym(GEQ);
+        case 30: 
+          { return sym(LEFTAR);
           }
         case 78: break;
-        case 33: 
-          { string.append('\n');
+        case 31: 
+          { return sym(RIGHTAR);
           }
         case 79: break;
-        case 34: 
-          { string.append('\t');
+        case 32: 
+          { /* one-line comment */
           }
         case 80: break;
-        case 35: 
-          { string.append('\r');
+        case 33: 
+          { return sym(LEQ);
           }
         case 81: break;
-        case 36: 
-          { string.append('\"');
+        case 34: 
+          { return sym(GEQ);
           }
         case 82: break;
-        case 37: 
-          { string.append('\\');
+        case 35: 
+          { string.append('\n');
           }
         case 83: break;
-        case 38: 
-          { return sym(CON);
+        case 36: 
+          { string.append('\t');
           }
         case 84: break;
-        case 39: 
-          { return sym(VALUE,yytext());
+        case 37: 
+          { string.append('\r');
           }
         case 85: break;
-        case 40: 
-          { return sym(TRUE);
+        case 38: 
+          { string.append('\"');
           }
         case 86: break;
-        case 41: 
-          { return sym(THEN);
+        case 39: 
+          { string.append('\\');
           }
         case 87: break;
-        case 42: 
-          { return sym(ELSE);
+        case 40: 
+          { return sym(CON);
           }
         case 88: break;
-        case 43: 
-          { return sym(ENDWHILE);
+        case 41: 
+          { return sym(VALUE,yytext());
           }
         case 89: break;
-        case 44: 
-          { return sym(ENDIF);
+        case 42: 
+          { return sym(TRUE);
           }
         case 90: break;
-        case 45: 
-          { return sym(FALSE);
+        case 43: 
+          { return sym(THEN);
           }
         case 91: break;
-        case 46: 
-          { return sym(WHILE);
+        case 44: 
+          { return sym(ELSE);
           }
         case 92: break;
+        case 45: 
+          { return sym(ENDWHILE);
+          }
+        case 93: break;
+        case 46: 
+          { return sym(ENDIF);
+          }
+        case 94: break;
+        case 47: 
+          { return sym(FALSE);
+          }
+        case 95: break;
+        case 48: 
+          { return sym(WHILE);
+          }
+        case 96: break;
         default: 
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;

@@ -32,6 +32,8 @@ class TexpArray extends Texp implements AST {
 			tail = tail.getTail();
 			if (tail != null) {
 				head = tail.getHead();
+			} else {
+				head = null;
 			}
 		}
 	}
@@ -63,6 +65,10 @@ class TexpArray extends Texp implements AST {
 		for (Texp item : ar) {
 			item.prepInterp(st);
 		}
+	}
+	
+	public Texp binop(Texp val2, char f) throws Exception {
+		throw new Exception("Illigal operation.");
 	}
 
 	public Texp interpret(SymTab st) throws Exception {

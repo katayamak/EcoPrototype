@@ -37,8 +37,8 @@ con ← i;
 
 con ← sum;
 
-// TODO : while のサポート
-// TODO : インデックス型のサポート
+//// TODO : while のサポート
+//// TODO : インデックス型のサポート
 // TODO : for のサポート
 // TODO : Excel入出力
 // TODO : インデックス指定
@@ -51,4 +51,4 @@ con ← sum;
 // TODO : 配列を配列化（非リスト化）
 // TODO : Include
 // TODO : シンボルテーブルの効率化
-
+// TODO : CSVの入出力

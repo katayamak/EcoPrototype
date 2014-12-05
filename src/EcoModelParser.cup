@@ -10,7 +10,7 @@
 
 // definition of tokens, if applicable with token type 
 terminal CON, LET, SIGMA, FORALL;
-terminal LEFTB, RIGHTB, COMMA, SEMICOLON;
+terminal LEFTAR, RIGHTAR, LEFTB, RIGHTB, COMMA, SEMICOLON;
 terminal LPAR, RPAR, LEFTCB, RIGHTCB;
 terminal MINUS, PLUS, TIMES, DIV, UMINUS;
 terminal EQ, LE, LEQ, GE, GEQ, AND, OR;

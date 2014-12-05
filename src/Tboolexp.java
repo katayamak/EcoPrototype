@@ -67,7 +67,11 @@ class Tboolexp extends Texp implements AST {
 		}
 		return false;
 	}
-	
+
+	public Texp binop(Texp val2, char f) throws Exception {
+		throw new Exception("Illigal operation.");
+	}
+
 	public Tboolexp interpret(SymTab st) throws Exception {
 		Texp e1x = e1.interpret(st);
 		Texp e2x = e2.interpret(st);

@@ -71,6 +71,9 @@ class Tsigma extends Texp implements AST {
 		}
 	}
 	
+	public Texp binop(Texp val2, char f) throws Exception {
+		throw new Exception("Illigal operation.");
+	}
 	
 	public Texp interpret(SymTab st) throws Exception {
 		Texp v = exp.interpret(st);

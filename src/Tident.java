@@ -36,7 +36,11 @@ class Tident extends Texp implements AST {
 //		STEvar ste = (STEvar)st.lookup(name);
 //		Object = ste.getIndex();
 	}
-
+	
+	public Texp binop(Texp val2, char f) throws Exception {
+		throw new Exception("Illigal operation.");
+	}
+	
 	public Texp interpret(SymTab st) {
 		STEvar ste = (STEvar)st.lookup(name);
 //		Texp v = null;

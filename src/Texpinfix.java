@@ -44,16 +44,6 @@ class Texpinfix extends Texp implements AST {
 //	private interface IntBinOp {
 //		public Double apply(Integer a, Integer b);
 //	}
-
-	private double calc (double a, double b, char f) {
-		switch (kind) {
-		case '+': return a + b;
-		case '-': return a - b;
-		case '*': return a * b;
-		case '/': return a / b;
-		}
-		return 0.0;
-	}
 	
 	private Texp operate(Texp val1, Texp val2, char f) throws Exception
 	{
@@ -62,103 +52,16 @@ class Texpinfix extends Texp implements AST {
 		} else if (val1 == null || val2 == null) {
 			throw new Exception ("配列の要素数が異なっています");
 		} 
-		if ((val1.getClass().equals(Tstring.class) || val2.getClass().equals(Tstring.class)) && calc(1.0, 1.0, f) != 2.0) {	//	文字列は＋のみ許可
+		if ((val1.getClass().equals(Tstring.class) || val2.getClass().equals(Tstring.class)) && f != '+') {	//	文字列は＋のみ許可
 			throw new Exception ("文字列は加算のみ可能です");
 		}
 		
-		
-		if (val1.getClass().equals(Tvalue.class)) {
-			Double dvalue1 = ((Tvalue)val1).getValue();
-			if (val2.getClass().equals(Tvalue.class)) {
-				return new Tvalue(calc(dvalue1, ((Tvalue)val2).getValue(), f));
-			} else if (val2.getClass().equals(Tindex.class)) {
-				return new Tvalue(calc(dvalue1, ((Tindex)val2).getValue().doubleValue(), f));
-			} else if (val2.getClass().equals(Tstring.class)) {
-				return new Tstring(dvalue1.toString() + val2.toString());
-			} else {
-				Texplist vl = (Texplist)val2;
-				if (vl.getHead() == null) {
-					return vl;
-				} else {
-					if (vl.getTail() == null) {
-						return new Texplist(operate(val1, vl.getHead(), f));
-					} else {
-						return new Texplist((Texplist)operate(val1, vl.getTail(), f), operate(val1, vl.getHead(), f));
-					}
-				}
-			}
-		} else if (val1.getClass().equals(Tindex.class)) {
-			Integer ivalue1 = ((Tindex)val1).getValue();
-			if (val2.getClass().equals(Tvalue.class)) {
-				return new Tvalue(calc(ivalue1.doubleValue(), ((Tvalue)val2).getValue(), f));
-			} else if (val2.getClass().equals(Tindex.class)) {
-				return new Tvalue(calc(ivalue1.doubleValue(), ((Tindex)val2).getValue().doubleValue(), f));
-			} else if (val2.getClass().equals(Tstring.class)) {
-				return new Tstring(ivalue1.toString() + val2.toString());
-			} else {
-				Texplist vl = (Texplist)val2;
-				if (vl.getHead() == null) {
-					return vl;
-				} else {
-					if (vl.getTail() == null) {
-						return new Texplist(operate(val1, vl.getHead(), f));
-					} else {
-						return new Texplist((Texplist)operate(val1, vl.getTail(), f), operate(val1, vl.getHead(), f));
-					}
-				}
-			}
-		} else if (val1.getClass().equals(Tstring.class)) {
-			String svalue1 = val1.toString();
-			if (val2.getClass().equals(Tstring.class)) {
-				return new Tstring(svalue1 + val2.toString());
-			} else if (val2.getClass().equals(Tvalue.class)) {
-				return new Tstring(svalue1 + val2.toString());
-			} else if (val2.getClass().equals(Tindex.class)) {
-				return new Tstring(svalue1 + val2.toString());
-			} else {
-				Texplist vl = (Texplist)val2;
-				if (vl.getHead() == null) {
-					return vl;
-				} else {
-					if (vl.getTail() == null) {
-						return new Texplist(operate(val1, vl.getHead(), f));
-					} else {
-						return new Texplist((Texplist)operate(val1, vl.getTail(), f), operate(val1, vl.getHead(), f));
-					}
-				}
-			}
-		} else {
-			if (val2.getClass().equals(Tvalue.class)) {
-				Texplist vl = (Texplist)val1;
-				if (vl.getHead() == null) {
-					return vl;
-				} else {
-					if (vl.getTail() == null) {
-						return new Texplist(operate(vl.getHead(), val2,  f));
-					} else {
-						return new Texplist((Texplist)operate(vl.getTail(), val2, f), operate(vl.getHead(), val2, f));
-					}
-				}
-			} else {
-				Texplist v1 = (Texplist)val1;
-				Texplist v2 = (Texplist)val2;
-				if (v1.getHead() == null) {
-					if (v2.getHead() == null) {
-						return v1;
-					} else {
-						throw new Exception("配列の要素数が異なっています");
-					}
-				} else {
-					if (v2.getHead() == null) {
-						throw new Exception("配列の要素数が異なっています");
-					} else {
-						return new Texplist((Texplist)operate(v1.getTail(), v2.getTail(), f), operate(v1.getHead(), v2.getHead(), f));
-					}
-				}
-			}
-		}
+		return val1.binop(val2, f);
 	}
 
+	public Texp binop(Texp val2, char f) throws Exception {
+		throw new Exception("Illigal operation.");
+	}
 
 	public Texp interpret(SymTab st) throws Exception {    
 		Texp e1 = exp1.interpret(st);
