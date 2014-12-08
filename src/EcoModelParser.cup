@@ -84,6 +84,8 @@ exp           ::= value:n
                   {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(e); :}
                 | LEFTB RIGHTB
                   {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(); :}
+                | LEFTAR explist:e RIGHTAR
+                  {: RESULT = new jp.co.mra.ecodsl.exp.TexpArray(e); :}
                 | exp:l PLUS exp:r
                   {: RESULT = new jp.co.mra.ecodsl.exp.Texpinfix(l,'+',r); :}
                 | exp:l TIMES exp:r

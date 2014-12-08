@@ -65,6 +65,10 @@ public class TexpArray extends Texp implements AST {
 		return ar.size();
 	}
 
+	public Texp get(int index) {
+		return ar.get(index);
+	}
+
 	public void prepInterp(SymTab st) {  // set pointers and indices
 		for (Texp item : ar) {
 			item.prepInterp(st);
@@ -72,7 +76,25 @@ public class TexpArray extends Texp implements AST {
 	}
 	
 	public Texp binop(Texp val2, char f) throws Exception {
-		throw new Exception("Illigal operation.");
+		if (val2.getClass().equals(TexpArray.class)) {				//	相手が配列だった場合
+			TexpArray v2ar = (TexpArray)val2;
+			if (ar.size() != v2ar.length()) {
+				throw new Exception("配列の要素数が異なっています");
+			}
+			ArrayList<Texp> nextAr = new ArrayList<Texp>();
+			for (int i = 0; i < ar.size(); i++) {
+				nextAr.add(ar.get(i).binop(v2ar.get(i), f));
+			}
+			return new TexpArray(nextAr);
+		} else {
+//			if (val2.getClass().equals(Tvalue.class)) {				//	相手が単数だった場合
+				ArrayList<Texp> nextAr = new ArrayList<Texp>();
+				for (int i = 0; i < ar.size(); i++) {
+					nextAr.add(ar.get(i).binop(val2, f));
+				}
+				return new TexpArray(nextAr);
+//			} 			
+		}
 	}
 
 	public Texp interpret(SymTab st) throws Exception {
