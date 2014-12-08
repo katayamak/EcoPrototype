@@ -1,3 +1,8 @@
+package jp.co.mra.ecodsl.exp;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.STEvar;
+import jp.co.mra.ecodsl.base.SymTab;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -11,7 +16,7 @@
 /**
  * AST node for an identifier
  */ 
-class Tident extends Texp implements AST {
+public class Tident extends Texp implements AST {
 	String name;                
 
 	public Tident(String s) {
@@ -20,6 +25,10 @@ class Tident extends Texp implements AST {
 
 	public String toString() {
 		return name; 
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void checkcontext(SymTab st) {         // CoCo (DefVar)

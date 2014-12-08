@@ -1,3 +1,7 @@
+package jp.co.mra.ecodsl.exp;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -14,7 +18,7 @@
  * Also contains a reference to the symbol table of 
  * the paramaters and their arity.
  */ 
-class Tsigma extends Texp implements AST {
+public class Tsigma extends Texp implements AST {
 	Texp exp;                   // function body
 
 	public Tsigma(Texp e) {

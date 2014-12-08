@@ -1,3 +1,4 @@
+package jp.co.mra.ecodsl.entry;
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -9,6 +10,11 @@
 
 
 import java.io.*;
+
+import jp.co.mra.ecodsl.base.EcoModelParser;
+import jp.co.mra.ecodsl.base.EcoModelScanner;
+import jp.co.mra.ecodsl.base.SymTab;
+import jp.co.mra.ecodsl.command.Tprogram;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 

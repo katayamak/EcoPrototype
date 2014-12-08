@@ -9,7 +9,7 @@
 
 
 import java_cup.runtime.Symbol;
-
+import jp.co.mra.ecodsl.base.EcoModelScanner;
 %%
 
 %class EcoModelScanner
@@ -23,7 +23,7 @@ import java_cup.runtime.Symbol;
 %{ 
   StringBuffer string = new StringBuffer();
   
-  SymTab symtab;          // externe symbol table
+  jp.co.mra.ecodsl.base.SymTab symtab;          // externe symbol table
 
   public void setSymtab(SymTab symtab) {
     this.symtab = symtab; 
@@ -82,10 +82,10 @@ import java_cup.runtime.Symbol;
 	                { return sym(VALUE,yytext()); }
 
 	[a-z|A-Z|\u{0391}-\u{03c9}]+[0-9|a-z|A-Z|\u{0391}-\u{03c9}]*          
-	                { symtab.enter(yytext(),new SymtabEntry(yytext()));
+	                { symtab.enter(yytext(),new jp.co.mra.ecodsl.base.SymtabEntry(yytext()));
 	                  return sym(ID,yytext()); }
 
-	\u{2190}        { symtab.enter(yytext(),new SymtabEntry(yytext()));   // ←
+	\u{2190}        { symtab.enter(yytext(),new jp.co.mra.ecodsl.base.SymtabEntry(yytext()));   // ←
 	                  return sym(LET); }
 	[\ \t\b\f\r\n]+ { /* eat whitespace */ }
 	"//"[^\n]*      { /* one-line comment */ }

@@ -1,3 +1,11 @@
+package jp.co.mra.ecodsl.command;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.STEvar;
+import jp.co.mra.ecodsl.base.SymTab;
+import jp.co.mra.ecodsl.exp.Texp;
+import jp.co.mra.ecodsl.exp.Texplist;
+import jp.co.mra.ecodsl.exp.Tident;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -14,7 +22,7 @@
  * Also contains a reference to the symbol table of 
  * the paramaters and their arity.
  */ 
-class Tlet implements AST {
+public class Tlet implements AST {
 	Tident ident;               // identifier
 	Texp exp;                   // function body
 
@@ -49,7 +57,7 @@ class Tlet implements AST {
 
 	public void setSymtab(SymTab st) throws Exception {
 		params = new SymTab(st);
-		params.enter(ident.name, new STEvar(ident.name, exp.interpret(st)));
+		params.enter(ident.getName(), new STEvar(ident.getName(), exp.interpret(st)));
 		//    parlist.setSymtab(params,false,0);
 		//    arity = params.size();
 
@@ -77,13 +85,13 @@ class Tlet implements AST {
 		if (ident == null) {
 			String name = "";
 			if (exp.getClass().equals(Tident.class)) {
-				name = "(" + ((Tident)exp).name + ")  ";
+				name = "(" + ((Tident)exp).getName() + ")  ";
 			}
 			System.out.println("ConOut : " + name + exp.interpret(st).toString());
 			return st;
 		} else {
 			SymTab newWorld = new SymTab(st);
-			newWorld.enter(ident.name, new STEvar(ident.name, exp.interpret(st)));
+			newWorld.enter(ident.getName(), new STEvar(ident.getName(), exp.interpret(st)));
 			return newWorld;
 		}
 	}

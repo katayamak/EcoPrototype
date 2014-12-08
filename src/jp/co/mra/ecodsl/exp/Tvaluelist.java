@@ -1,5 +1,7 @@
+package jp.co.mra.ecodsl.exp;
 
-class Tvaluelist {
+
+public class Tvaluelist {
 	Object obj;
 	Tvaluelist objlist;           // next list element (optional null)
 	

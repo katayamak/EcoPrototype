@@ -1,3 +1,8 @@
+package jp.co.mra.ecodsl.command;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+import jp.co.mra.ecodsl.exp.Tvalue;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -17,7 +22,7 @@
  * All operations like context check, symbol table build up
  * etc. start here.
  */ 
-class Tprogram implements AST {
+public class Tprogram implements AST {
 
 	Topelist opelist;           // input variables
 

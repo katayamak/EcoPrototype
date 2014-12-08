@@ -1,3 +1,7 @@
+package jp.co.mra.ecodsl.exp;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -11,22 +15,22 @@
 /**
  * AST node for a number
  */ 
-class Tvalue extends Texp implements AST {
-	private Double n;             // value of the number
+public class Tindex extends Texp implements AST {
+	private Integer n;             // value of the number
 
-	public Tvalue(String s) {
+	public Tindex(String s) {
 		try { 
-			n = Double.parseDouble(s); 
+			n = Integer.parseInt(s); 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public Tvalue(Double d) {
+	public Tindex(Integer d) {
 		n = d; 
 	}
 
-	public Double getValue() {
+	public Integer getValue() {
 		return n;
 	}
 
@@ -40,26 +44,16 @@ class Tvalue extends Texp implements AST {
 	public void prepInterp(SymTab st) { 
 	}
 
-	public static double calc (double a, double b, char f) {
-		switch (f) {
-		case '+': return a + b;
-		case '-': return a - b;
-		case '*': return a * b;
-		case '/': return a / b;
-		}
-		return 0.0;
-	}
-
-	public Texp binop(Texp val, char f) {
-		Double dvalue1 = n;
-		if (val.getClass().equals(Tvalue.class)) {
-			return new Tvalue(calc(dvalue1, ((Tvalue)val).getValue(), f));
-		} else if (val.getClass().equals(Tindex.class)) {
-			return new Tvalue(calc(dvalue1, ((Tindex)val).getValue().doubleValue(), f));
-		} else if (val.getClass().equals(Tstring.class)) {
-			return new Tstring(dvalue1.toString() + val.toString());
+	public Texp binop(Texp val2, char f) {
+		Integer ivalue1 = n;
+		if (val2.getClass().equals(Tvalue.class)) {
+			return new Tvalue(Tvalue.calc(ivalue1.doubleValue(), ((Tvalue)val2).getValue(), f));
+		} else if (val2.getClass().equals(Tindex.class)) {
+			return new Tvalue(Tvalue.calc(ivalue1.doubleValue(), ((Tindex)val2).getValue().doubleValue(), f));
+		} else if (val2.getClass().equals(Tstring.class)) {
+			return new Tstring(ivalue1.toString() + val2.toString());
 		} else {
-			Texplist vl = (Texplist)val;
+			Texplist vl = (Texplist)val2;
 			if (vl.getHead() == null) {
 				return vl;
 			} else {
@@ -71,7 +65,6 @@ class Tvalue extends Texp implements AST {
 			}
 		}
 	}
-
 	public Texp interpret(SymTab st) {
 		return this;
 	}

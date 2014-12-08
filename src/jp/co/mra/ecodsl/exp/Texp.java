@@ -1,3 +1,7 @@
+package jp.co.mra.ecodsl.exp;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -19,7 +23,7 @@
  * <tt>par</tt>. Before interpret can be called, pointers
  * and variable indices must be set with <tt>prepInterp</tt>.
  */ 
-abstract class Texp implements AST {
+abstract public class Texp implements AST {
   // test context conditions (DefFun,DefVar,Arity)
   abstract public void checkcontext(SymTab st);
   

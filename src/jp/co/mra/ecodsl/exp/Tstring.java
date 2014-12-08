@@ -1,3 +1,7 @@
+package jp.co.mra.ecodsl.exp;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -11,7 +15,7 @@
 /**
  * AST node for a number
  */ 
-class Tstring extends Texp implements AST {
+public class Tstring extends Texp implements AST {
 	String s;             // value of the number
 
 	public Tstring(String s) {

@@ -1,4 +1,8 @@
+package jp.co.mra.ecodsl.exp;
 import java.util.ArrayList;
+
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
@@ -17,7 +21,7 @@ import java.util.ArrayList;
  * results of the expressions in an array that can be used
  * as parameter list for function calls.
  */ 
-class TexpArray extends Texp implements AST {
+public class TexpArray extends Texp implements AST {
 	ArrayList<Texp> ar = new ArrayList<Texp>();
 	
 	public TexpArray(Texplist list) {

@@ -19,20 +19,20 @@ terminal TRUE, FALSE;
 terminal IF, THEN, ELSE, ENDIF;
 terminal WHILE, DO, ENDWHILE;
 
-non terminal Tprogram  program;
-non terminal Texplist  explist;
-non terminal Topelist opelist;
-non terminal Tope      ope;
-non terminal Texp      exp;
-non terminal Tboolexp  boolexp;
-non terminal Tident    ident;
-non terminal Tvalue   value;
-non terminal Tindex   index;
-non terminal Tlet   let;
-non terminal Tstring   string;
-non terminal Tifthenelse   if;
-non terminal Tprewhile   prewhile;
-non terminal Tpostwhile  postwhile;
+non terminal jp.co.mra.ecodsl.command.Tprogram  program;
+non terminal jp.co.mra.ecodsl.exp.Texplist  explist;
+non terminal jp.co.mra.ecodsl.command.Topelist opelist;
+non terminal jp.co.mra.ecodsl.command.Tope      ope;
+non terminal jp.co.mra.ecodsl.exp.Texp      exp;
+non terminal jp.co.mra.ecodsl.exp.Tboolexp  boolexp;
+non terminal jp.co.mra.ecodsl.exp.Tident    ident;
+non terminal jp.co.mra.ecodsl.exp.Tvalue   value;
+non terminal jp.co.mra.ecodsl.exp.Tindex   index;
+non terminal jp.co.mra.ecodsl.command.Tlet   let;
+non terminal jp.co.mra.ecodsl.exp.Tstring   string;
+non terminal jp.co.mra.ecodsl.command.Tifthenelse   if;
+non terminal jp.co.mra.ecodsl.command.Tprewhile   prewhile;
+non terminal jp.co.mra.ecodsl.command.Tpostwhile  postwhile;
 //non terminal Tsigma   sigma;
 
 
@@ -45,29 +45,29 @@ precedence left TIMES, DIV, AND;
 // here the rules start 
 
 program       ::= opelist:ol
-                  {: RESULT = new Tprogram(ol); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tprogram(ol); :}
                 ;
 
 explist       ::= exp:e
-                  {: RESULT = new Texplist(e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(e); :}
                 | explist:l COMMA exp:e
-                  {: RESULT = new Texplist(l,e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(l,e); :}
                 ;
 
 opelist      ::= ope:o
-                  {: RESULT = new Topelist(o);:}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Topelist(o);:}
                 | opelist:l ope:o
-                  {: RESULT = new Topelist(l,o); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Topelist(l,o); :}
                 ;
 
 ope          ::= let:l SEMICOLON
-                  {: RESULT = new Tope(l); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tope(l); :}
                 | if:i SEMICOLON
-                  {: RESULT = new Tope(i); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tope(i); :}
                 | prewhile:w SEMICOLON
-                  {: RESULT = new Tope(w); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tope(w); :}
                 | postwhile:w SEMICOLON
-                  {: RESULT = new Tope(w); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tope(w); :}
                  ;
 
 exp           ::= value:n
@@ -81,79 +81,79 @@ exp           ::= value:n
                 | LPAR exp:e RPAR
                   {: RESULT = e; :}
                 | LEFTB explist:e RIGHTB
-                  {: RESULT = new Texplist(e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(e); :}
                 | LEFTB RIGHTB
-                  {: RESULT = new Texplist(); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(); :}
                 | exp:l PLUS exp:r
-                  {: RESULT = new Texpinfix(l,'+',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texpinfix(l,'+',r); :}
                 | exp:l TIMES exp:r
-                  {: RESULT = new Texpinfix(l,'*',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texpinfix(l,'*',r); :}
                 | exp:l DIV exp:r
-                  {: RESULT = new Texpinfix(l,'/',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texpinfix(l,'/',r); :}
                 | exp:l MINUS exp:r
-                  {: RESULT = new Texpinfix(l,'-',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texpinfix(l,'-',r); :}
                 | SIGMA LPAR exp:e RPAR
-                  {: RESULT = new Tsigma(e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tsigma(e); :}
                 ;
 
 boolexp       ::= 
                   TRUE
-                  {: RESULT = new Tboolexp(true); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(true); :}
                 | FALSE
-                  {: RESULT = new Tboolexp(false); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(false); :}
                 | exp:l EQ exp:r
-                  {: RESULT = new Tboolexp(l,'=',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'=',r); :}
                 | exp:l LE exp:r
-                  {: RESULT = new Tboolexp(l,'<',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'<',r); :}
                 | exp:l LEQ exp:r
-                  {: RESULT = new Tboolexp(l,'!',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'!',r); :}
                 | exp:l GE exp:r
-                  {: RESULT = new Tboolexp(l,'>',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'>',r); :}
                 | exp:l GEQ exp:r
-                  {: RESULT = new Tboolexp(l,'$',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'$',r); :}
                 | boolexp:l AND boolexp:r
-                  {: RESULT = new Tboolexp(l,'&',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'&',r); :}
                 | boolexp:l OR boolexp:r
-                  {: RESULT = new Tboolexp(l,'|',r); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tboolexp(l,'|',r); :}
                 | LPAR boolexp:e RPAR
                   {: RESULT = e; :}
                 ;
 
 ident         ::= ID:n
-                  {: RESULT = new Tident(n); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tident(n); :}
                 ;
 
 value        ::= VALUE:z
-                  {: RESULT = new Tvalue(z); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tvalue(z); :}
                 ;
 
 index        ::= INDEX:z
-                  {: RESULT = new Tindex(z); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tindex(z); :}
                 ;
 
 string       ::= STRINGLITERAL:s
-                  {: RESULT = new Tstring(s); :}
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tstring(s); :}
                 ;
 
 let           ::= ident:i LET exp:e
-                  {: RESULT = new Tlet(i,e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tlet(i,e); :}
                   |
                   CON LET exp:e
-                  {: RESULT = new Tlet(e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tlet(e); :}
                  ;
 if            ::=
                   IF boolexp:b THEN opelist:t ELSE opelist:e ENDIF
-                  {: RESULT = new Tifthenelse(b,t,e); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tifthenelse(b,t,e); :}
                 | IF boolexp:b THEN opelist:t 
-                  {: RESULT = new Tifthenelse(b,t); :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tifthenelse(b,t); :}
                 ;
 
 prewhile       ::=
                   WHILE LPAR boolexp:b RPAR LEFTCB opelist:l RIGHTCB
-                  {: RESULT = new Tprewhile(b, l);  :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tprewhile(b, l);  :}
                 ;
 
 postwhile      ::=
                   DO LEFTCB opelist:l RIGHTCB WHILE LPAR boolexp:b RPAR 
-                  {: RESULT = new Tpostwhile(b, l);  :}
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tpostwhile(b, l);  :}
                 ;

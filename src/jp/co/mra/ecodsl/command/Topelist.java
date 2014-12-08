@@ -1,3 +1,8 @@
+package jp.co.mra.ecodsl.command;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -11,7 +16,7 @@
 /**
  * AST node for declaration lists of functions
  */ 
-class Topelist implements AST {
+public class Topelist implements AST {
 	Topelist opelist;         // rest list (optional null)
 	Tope ope;                 // declaration
 

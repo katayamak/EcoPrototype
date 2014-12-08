@@ -1,3 +1,8 @@
+package jp.co.mra.ecodsl.command;
+import jp.co.mra.ecodsl.base.AST;
+import jp.co.mra.ecodsl.base.SymTab;
+import jp.co.mra.ecodsl.exp.Tboolexp;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -14,7 +19,7 @@
  * Also contains a reference to the symbol table of 
  * the paramaters and their arity.
  */ 
-class Tpostwhile implements AST {
+public class Tpostwhile implements AST {
 	Tboolexp boolexp;               // 脱出条件
 	Topelist ol;                   // function body
 

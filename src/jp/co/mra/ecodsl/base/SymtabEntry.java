@@ -1,3 +1,4 @@
+package jp.co.mra.ecodsl.base;
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright (C) 2001       Gerwin Klein <lsf@jflex.de>                    *
  * Copyright (C) 2001       Bernhard Rumpe <rumpe@in.tum.de>               *
@@ -9,29 +10,30 @@
 
 
 /**
- * Symbol table entry for variables.
+ * Symbol table entry for names, there are subclasses for
+ * variables and functions.
  * 
- * Contains index in the parameter list and a flag if it
- * is an input variable.
+ * Defines constants UNKNOWN, VAR und FUN as kinds of
+ * symbol table entries.
  */ 
-class STEvar extends SymtabEntry {
-	Object value;                  
-
-	public STEvar(String v, Object value) {
-		super(v);
-		this.value = value;
+public class SymtabEntry {
+	String name;
+	
+	public SymtabEntry(String v) {
+		name = v; 
 	}
 
 	public int kind() {
-		return SymtabEntry.VAR; 
+		return UNKNOWN; 
 	}
 
 	public String toString() {
-		return value.toString();
+		return ("unknown " + name); 
 	}
 
-	public Object getValue() {
-		return value; 
-	}
+	static final int UNKNOWN = 12;
+	static final int VAR = 13;
+	static final int VARLIST = 14;
+	//  static final int FUN = 14;
 }
 
