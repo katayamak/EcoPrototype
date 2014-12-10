@@ -34,7 +34,12 @@ public class Texplist extends Texp implements AST {
 		return exp;
 	}
 
-	public Texplist(Texplist p, Texp e) {
+//	public Texplist(Texplist p, Texp e) {
+//		explist = p;
+//		exp = e;
+//	}
+//
+	public Texplist(Texp e, Texplist p) {
 		explist = p;
 		exp = e;
 	}
@@ -70,9 +75,9 @@ public class Texplist extends Texp implements AST {
 
 	public String toString() {
 		if (explist != null)
-			return explist + ", " + exp;
+			return  exp + ", "+ explist;
 		else 
-			return "[" + exp.toString();
+			return exp.toString() + "]";
 	}
 
 	public void checkcontext(SymTab st) {
@@ -102,7 +107,7 @@ public class Texplist extends Texp implements AST {
 				if (explist == null) {	//	要素が一つの場合
 					return new Texplist(exp.binop(val2,  f));
 				} else {				//	要素が二つ以上の場合
-					return new Texplist((Texplist)explist.binop(val2, f), explist.binop(val2, f));
+					return new Texplist(explist.binop(val2, f), (Texplist)explist.binop(val2, f));
 //					return new Texplist((Texplist)operate(vl.getTail(), val2, f), operate(vl.getHead(), val2, f));
 				}
 			}
@@ -124,7 +129,7 @@ public class Texplist extends Texp implements AST {
 						return new Texplist(exp.binop(v2.getHead(), f));
 					}
 				} else {						//	要素が二つ以上の場合
-					return new Texplist((Texplist)explist.binop(v2.getTail(), f), binop(v2.getHead(), f));
+					return new Texplist(exp.binop(v2.getHead(), f), (Texplist)explist.binop(v2.getTail(), f));
 //					return new Texplist((Texplist)operate(v1.getTail(), v2.getTail(), f), operate(v1.getHead(), v2.getHead(), f));
 				}
 			}
@@ -137,7 +142,7 @@ public class Texplist extends Texp implements AST {
 		if (explist != null) {
 			others = explist.interpret(st);
 		}
-		return new Texplist((Texplist)others, obj);
+		return new Texplist(obj, (Texplist)others);
 	}
 }
 

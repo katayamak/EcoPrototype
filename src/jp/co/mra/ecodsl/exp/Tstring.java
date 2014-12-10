@@ -53,7 +53,7 @@ public class Tstring extends Texp implements AST {
 				if (vl.getTail() == null) {
 					return new Texplist(binop(vl.getHead(), f));
 				} else {
-					return new Texplist((Texplist)binop(vl.getTail(), f), binop(vl.getHead(), f));
+					return new Texplist(binop(vl.getHead(), f), (Texplist)binop(vl.getTail(), f));
 				}
 			}
 		}

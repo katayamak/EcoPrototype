@@ -70,7 +70,7 @@ public class Tsigma extends Texp implements AST {
 			if (v.getTail() == null) {
 				return new Texplist(hv, null);
 			} else {
-				return new Texplist(hv, sumUp(v.getTail()));
+				return new Texplist(sumUp(v.getTail()), hv);
 			}
 		}
 	}

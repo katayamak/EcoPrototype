@@ -50,8 +50,8 @@ program       ::= opelist:ol
 
 explist       ::= exp:e
                   {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(e); :}
-                | explist:l COMMA exp:e
-                  {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(l,e); :}
+                | exp:e COMMA explist:l
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Texplist(e, l); :}
                 ;
 
 opelist      ::= ope:o
