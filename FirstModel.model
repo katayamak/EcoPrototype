@@ -3,6 +3,9 @@ w ← [522.0, 300.0, 344.0];
 con ← Σ(w);
 con ← q * w;
 wavg ← Σ(q * w) / Σ(w);
+
+csval ← csv "file.txt" ["KEY", "VALUE"];
+con ← csval;
 s ← "abcde";
 sl ← [["01", "02", "03"], ["11", "12", "13"]];
 con ← wavg;

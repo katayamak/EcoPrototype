@@ -53,6 +53,7 @@ import jp.co.mra.ecodsl.base.EcoModelScanner;
 	"while"         { return sym(WHILE); }
 	"do"            { return sym(DO); }
 	"wend"          { return sym(ENDWHILE); }
+	"csv"           { return sym(CSV); }
 	"{"             { return sym(LEFTCB); }
 	"}"             { return sym(RIGHTCB); }
 	"[|"            { return sym(LEFTAR); }

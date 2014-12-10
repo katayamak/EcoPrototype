@@ -18,6 +18,7 @@ terminal String VALUE, INDEX, ID, STRINGLITERAL;
 terminal TRUE, FALSE;
 terminal IF, THEN, ELSE, ENDIF;
 terminal WHILE, DO, ENDWHILE;
+terminal CSV;
 
 non terminal jp.co.mra.ecodsl.command.Tprogram  program;
 non terminal jp.co.mra.ecodsl.exp.Texplist  explist;
@@ -33,6 +34,7 @@ non terminal jp.co.mra.ecodsl.exp.Tstring   string;
 non terminal jp.co.mra.ecodsl.command.Tifthenelse   if;
 non terminal jp.co.mra.ecodsl.command.Tprewhile   prewhile;
 non terminal jp.co.mra.ecodsl.command.Tpostwhile  postwhile;
+non terminal jp.co.mra.ecodsl.exp.Tcsv  csv;
 //non terminal Tsigma   sigma;
 
 
@@ -137,11 +139,18 @@ string       ::= STRINGLITERAL:s
                   {: RESULT = new jp.co.mra.ecodsl.exp.Tstring(s); :}
                 ;
 
-let           ::= ident:i LET exp:e
-                  {: RESULT = new jp.co.mra.ecodsl.command.Tlet(i,e); :}
+let           ::= 
+                  ident:i LET csv:c
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tlet(i, c); :}
+                  |
+                  csv:c LET exp:e
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tlet(c, e); :}
                   |
                   CON LET exp:e
                   {: RESULT = new jp.co.mra.ecodsl.command.Tlet(e); :}
+                  |
+                  ident:i LET exp:e
+                  {: RESULT = new jp.co.mra.ecodsl.command.Tlet(i,e); :}
                  ;
 if            ::=
                   IF boolexp:b THEN opelist:t ELSE opelist:e ENDIF
@@ -158,4 +167,12 @@ prewhile       ::=
 postwhile      ::=
                   DO LEFTCB opelist:l RIGHTCB WHILE LPAR boolexp:b RPAR 
                   {: RESULT = new jp.co.mra.ecodsl.command.Tpostwhile(b, l);  :}
+                ;
+
+csv            ::=
+                  CSV string:file LEFTB explist:l RIGHTB
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tcsv(file, l);  :}         // ヘッダ行が無い場合はカラム名をリストで渡す（）
+                  |
+                  CSV string:file
+                  {: RESULT = new jp.co.mra.ecodsl.exp.Tcsv(file);  :}         // ヘッダ行がある場合はカラム名を渡さない（最初の行をカラム名と解釈する）
                 ;

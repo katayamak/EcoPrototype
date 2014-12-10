@@ -2,6 +2,7 @@ package jp.co.mra.ecodsl.command;
 import jp.co.mra.ecodsl.base.AST;
 import jp.co.mra.ecodsl.base.STEvar;
 import jp.co.mra.ecodsl.base.SymTab;
+import jp.co.mra.ecodsl.exp.Tcsv;
 import jp.co.mra.ecodsl.exp.Texp;
 import jp.co.mra.ecodsl.exp.Texplist;
 import jp.co.mra.ecodsl.exp.Tident;
@@ -24,6 +25,8 @@ import jp.co.mra.ecodsl.exp.Tident;
  */ 
 public class Tlet implements AST {
 	Tident ident;               // identifier
+	Tcsv csvout;               // csv
+	Tcsv csvin;               // csv
 	Texp exp;                   // function body
 
 	private Texp convertIfList(Texp e) {
@@ -37,6 +40,18 @@ public class Tlet implements AST {
 		ident = i;
 		
 		exp = e; //convertIfList(e);
+	}
+	
+	public Tlet(Tcsv c, Texp e) {
+		csvout = c;
+		
+		exp = e; //convertIfList(e);
+	}
+	
+	public Tlet(Tident i,  Tcsv c) {
+		csvin = c;
+		
+		ident = i;
 	}
 	
 	public Tlet(Texp e) {		//	Console out
@@ -82,17 +97,23 @@ public class Tlet implements AST {
 	}
 
 	public SymTab interpret(SymTab st) throws Exception {
-		if (ident == null) {
+		if (csvout != null) {
+			return st;
+		} else if (csvin != null) {
+			SymTab newWorld = new SymTab(st);
+			newWorld.enter(ident.getName(), new STEvar(ident.getName(), csvin.read()));
+			return newWorld;
+		} else if (ident != null) {
+			SymTab newWorld = new SymTab(st);
+			newWorld.enter(ident.getName(), new STEvar(ident.getName(), exp.interpret(st)));
+			return newWorld;
+		} else {
 			String name = "";
 			if (exp.getClass().equals(Tident.class)) {
 				name = "(" + ((Tident)exp).getName() + ")  ";
 			}
 			System.out.println("ConOut : " + name + exp.interpret(st).toString());
 			return st;
-		} else {
-			SymTab newWorld = new SymTab(st);
-			newWorld.enter(ident.getName(), new STEvar(ident.getName(), exp.interpret(st)));
-			return newWorld;
 		}
 	}
 }
